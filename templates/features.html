@@ -204,7 +204,7 @@
         >
           <!-- Feature 1: Chatbot -->
           <a
-            href="javascript:void(0)"
+            href="#"
             class="feature-card group cursor-pointer"
             alt="Chatbot"
             onclick="toggleModal('chatbot-modal')"
@@ -241,7 +241,7 @@
           </a>
 
           <!-- Feature 2: Journal -->
-          <a href="/templates/journal.html" class="feature-card group"">
+          <a href="/templates/journal.html" class="feature-card group">
             <div
               class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-purple-200 hover:border-purple-400"
             >
@@ -345,10 +345,10 @@
     <!-- Chatbot Modal -->
     <div
       id="chatbot-modal"
-      class="modal fixed inset-0 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity duration-300 ease-out opacity-0 p-6"
+      class="modal fixed inset-0 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden"
     >
       <div
-        class="bg-secondary text-primary rounded-xl shadow-2xl transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col w-4/5 max-w-4xl h-3/4 max-h-[700px]"
+        class="bg-secondary text-primary rounded-xl shadow-2xl transform flex flex-col w-4/5 max-w-4xl h-3/4 max-h-[700px]"
       >
         <!-- Modal Header -->
         <div
@@ -356,7 +356,7 @@
         >
           <h3 class="text-2xl font-bold">ADHDGuru Assistant</h3>
           <button
-            class="modal-close text-gray-600 hover:text-black focus:outline-none transition-colors duration-200"
+            class="modal-close text-gray-600 hover:text-black focus:outline-none"
             onclick="toggleModal('chatbot-modal')"
           >
             <svg
@@ -404,20 +404,20 @@
             <input
               type="text"
               id="chat-input"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow duration-200"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               placeholder="Type your message..."
               onkeydown="if(event.key === 'Enter') sendMessage()"
             />
             <button
               id="send-btn"
-              class="px-6 py-3 bg-primary text-white rounded-lg font-semibold border border-primary hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all duration-200 transform hover:scale-105 active:scale-95"
+              class="px-6 py-3 bg-primary text-white rounded-lg font-semibold border border-primary hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
               onclick="sendMessage()"
             >
               Send
             </button>
             <button
               id="mic-btn"
-              class="px-4 py-3 bg-primary text-white rounded-lg font-semibold border border-primary hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all duration-200 transform hover:scale-105 active:scale-95"
+              class="px-4 py-3 bg-primary text-white rounded-lg font-semibold border border-primary hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
               aria-label="Use Microphone"
             >
               <svg
@@ -509,7 +509,6 @@
     </footer>
 
     <!-- Scripts -->
-    <!-- <script src="../static/chat.js"></script> -->
     <script src="../static/script.js"></script>
     <script>
       // Mobile menu toggle
@@ -577,52 +576,45 @@
         if (modal.classList.contains('hidden')) {
           // Show modal
           modal.classList.remove('hidden');
-          setTimeout(() => {
-            modal.classList.remove('opacity-0');
-            modalContent.classList.remove('scale-95', 'opacity-0');
-            
-            // Initialize chat session when opening the chatbot modal
-            if (modalId === 'chatbot-modal' && typeof startChatSession === 'function') {
-              // Wait for modal animation to complete before starting chat session
-              setTimeout(() => {
-                if (!chatInitialized) {
-                  startChatSession().catch(err => {
-                    console.error("Failed to start chat session:", err);
-                    const chatContainer = document.getElementById('chat-container');
-                    chatContainer.innerHTML += `
-                      <div class="flex justify-start mb-6">
-                        <div class="bg-red-100 text-red-800 rounded-lg py-3 px-4 max-w-[80%] shadow-sm">
-                          <p class="font-medium">
-                            Sorry, there was an error connecting to the chat service. Please try again later.
-                          </p>
-                          <p class="text-xs text-gray-500 mt-1">Just now</p>
-                        </div>
-                      </div>
-                    `;
-                  });
-                }
-              }, 300);
+          modal.classList.remove('opacity-0');
+          modalContent.classList.remove('scale-95', 'opacity-0');
+
+          // Initialize chat session when opening the chatbot modal
+          if (modalId === 'chatbot-modal' && typeof startChatSession === 'function') {
+            if (!chatInitialized) {
+              startChatSession().catch(err => {
+                console.error("Failed to start chat session:", err);
+                const chatContainer = document.getElementById('chat-container');
+                chatContainer.innerHTML += `
+                  <div class="flex justify-start mb-6">
+                    <div class="bg-red-100 text-red-800 rounded-lg py-3 px-4 max-w-[80%] shadow-sm">
+                      <p class="font-medium">
+                        Sorry, there was an error connecting to the chat service. Please try again later.
+                      </p>
+                      <p class="text-xs text-gray-500 mt-1">Just now</p>
+                    </div>
+                  </div>
+                `;
+              });
             }
-          }, 10);
+          }
         } else {
           // Hide modal
           modal.classList.add('opacity-0');
           modalContent.classList.add('scale-95', 'opacity-0');
-          setTimeout(() => {
-            modal.classList.add('hidden');
-            
-            // Reset chat when closing the chatbot modal
-            if (modalId === 'chatbot-modal') {
-              // Reset chat variables
-              if (typeof resetChat === 'function') {
-                resetChat();
-              } else {
-                // Fallback if the function isn't available
-                window.currentChatId = null;
-                window.chatInitialized = false;
-              }
+          modal.classList.add('hidden');
+
+          // Reset chat when closing the chatbot modal
+          if (modalId === 'chatbot-modal') {
+            // Reset chat variables
+            if (typeof resetChat === 'function') {
+              resetChat();
+            } else {
+              // Fallback if the function isn't available
+              window.currentChatId = null;
+              window.chatInitialized = false;
             }
-          }, 300);
+          }
         }
       }
 
@@ -684,20 +676,51 @@
         }
       }
 
-      // Add event listener for chatbot feature card
-      document.addEventListener('DOMContentLoaded', function() {
-        const chatbotCard = document.querySelector('.feature-card[onclick="toggleModal(\'chatbot-modal\')"]');
+      // Add event listeners
+      document.addEventListener('DOMContentLoaded', function () {
+        // For chatbot modal feature card
+        const chatbotCard = document.querySelector('.feature-card[alt="Chatbot"]');
         if (chatbotCard) {
-          chatbotCard.addEventListener('click', function(e) {
+          chatbotCard.addEventListener('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
             toggleModal('chatbot-modal');
           });
         }
 
+        // Event listener for modal close buttons
+        const modalCloseButtons = document.querySelectorAll('.modal-close');
+        modalCloseButtons.forEach(button => {
+          button.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const modalId = this.closest('.modal').id;
+            toggleModal(modalId);
+          });
+        });
+
+        // Prevent modal from closing when clicking on modal content
+        const modalContents = document.querySelectorAll('.modal > div');
+        modalContents.forEach(content => {
+          content.addEventListener('click', function (e) {
+            e.stopPropagation();
+          });
+        });
+
+        // Close modal when clicking outside of modal content
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          modal.addEventListener('click', function (e) {
+            if (e.target === this) {
+              toggleModal(this.id);
+            }
+          });
+        });
+
         // Event listener for send button
         const sendBtn = document.getElementById('send-btn');
         if (sendBtn) {
-          sendBtn.addEventListener('click', function() {
+          sendBtn.addEventListener('click', function () {
             if (typeof sendMessage === 'function') {
               sendMessage();
             }
@@ -707,42 +730,13 @@
         // Event listener for chat input
         const chatInput = document.getElementById('chat-input');
         if (chatInput) {
-          chatInput.addEventListener('keydown', function(e) {
+          chatInput.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && typeof sendMessage === 'function') {
               e.preventDefault();
               sendMessage();
             }
           });
         }
-      });
-
-      // Add loading state management
-      const featureCards = document.querySelectorAll('.feature-card');
-      featureCards.forEach(card => {
-        card.addEventListener('click', async function(e) {
-          const href = this.getAttribute('href');
-          if (href === 'javascript:void(0)') return; // Skip for chatbot modal
-          
-          e.preventDefault();
-          
-          // Add loading state
-          const originalContent = this.innerHTML;
-          this.innerHTML = `
-            <div class="flex items-center justify-center p-4">
-              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            </div>
-          `;
-          
-          try {
-            // Simulate a small delay for better UX
-            await new Promise(resolve => setTimeout(resolve, 500));
-            window.location.href = href;
-          } catch (error) {
-            // Restore original content on error
-            this.innerHTML = originalContent;
-            showToast('Failed to navigate. Please try again.', 'error');
-          }
-        });
       });
     </script>
   </body>
