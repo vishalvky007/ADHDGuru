@@ -1,0 +1,130 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "text": "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you find it hard to finish small parts of a task after doing the big important work?",
+      "example": "Like baking a cake but not feeling like decorating it after it's done."
+    },
+    {
+      "id": 2,
+      "text": "How often do you have difficulty getting things in order when you have to do a task that requires organisation?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Is it hard to arrange or plan things properly when you have to be organized?",
+      "example": "Like packing a suitcase but not knowing what to pack first."
+    },
+    {
+      "id": 3,
+      "text": "How often do you have problems remembering appointments or obligations?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you forget important things you planned or agreed to do?",
+      "example": "Like forgetting you had a doctor's appointment until they call you."
+    },
+    {
+      "id": 4,
+      "text": "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you avoid or delay starting a task that needs deep thinking?",
+      "example": "Like needing to write an assignment but scrolling through your phone instead."
+    },
+    {
+      "id": 5,
+      "text": "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you find it hard to stay still, moving your hands or feet when sitting for a long time?",
+      "example": "Like tapping your pen on the table during a long meeting."
+    },
+    {
+      "id": 6,
+      "text": "How often do you feel overly active and compelled to do things, like you were driven by a motor?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you feel like you have too much energy and can’t sit still?",
+      "example": "Like always moving around the house without being able to relax."
+    },
+    {
+      "id": 7,
+      "text": "How often do you make careless mistakes when you have to work on a boring or difficult project?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you make small mistakes because the task feels boring or difficult?",
+      "example": "Like skipping questions on a boring worksheet without noticing."
+    },
+    {
+      "id": 8,
+      "text": "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Is it hard for you to stay focused during boring or repeated activities?",
+      "example": "Like zoning out while folding clothes or doing paperwork."
+    },
+    {
+      "id": 9,
+      "text": "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Is it hard for you to stay focused during boring or repeated activities?",
+      "example": "Like losing track of what you’re doing halfway through washing dishes."
+    },
+    {
+      "id": 10,
+      "text": "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you zone out and miss parts of a conversation even when someone is talking straight to you?",
+      "example": "Like someone telling you instructions but you realize you didn’t catch any of it."
+    },
+    {
+      "id": 11,
+      "text": "How often do you misplace or have difficulty finding things at home or at work?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you lose items like keys, phones, or papers even if you just had them?",
+      "example": "Like setting down your phone and forgetting where it is two minutes later."
+    },
+    {
+      "id": 12,
+      "text": "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you get up and move around when you're expected to stay seated?",
+      "example": "Like getting up during a long classroom lecture even though you’re supposed to stay seated."
+    },
+    {
+      "id": 13,
+      "text": "How often do you feel restless or fidgety?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you often feel like you have to move around because you can't sit still?",
+      "example": "Like tapping your fingers or bouncing your legs when sitting in a movie theater."
+    },
+    {
+      "id": 14,
+      "text": "How often do you have difficulty unwinding and relaxing when you have time to yourself?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Is it hard for you to relax even when there’s no pressure?",
+      "example": "Like lying on the couch but feeling like you have to get up and do something."
+    },
+    {
+      "id": 15,
+      "text": "How often do you find yourself talking too much when you are in social situations?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you sometimes keep talking a lot without realizing in a group setting?",
+      "example": "Like telling too many stories at a party without noticing others want to speak."
+    },
+    {
+      "id": 16,
+      "text": "When you're in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you jump in and finish people's sentences before they do?",
+      "example": "Like guessing the end of a friend’s story because you are eager to respond."
+    },
+    {
+      "id": 17,
+      "text": "How often do you have difficulty waiting your turn in situations when turn taking is required?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Is it hard for you to patiently wait when others are ahead of you?",
+      "example": "Like feeling very impatient while waiting in a long line at a grocery store."
+    },
+    {
+      "id": 18,
+      "text": "How often do you interrupt others when they are busy?",
+      "options": ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
+      "meaning": "Do you interrupt people even when they are busy because you feel your thought can't wait?",
+      "example": "Like barging into a coworker's discussion because you remembered something important."
+    }
+  ]
+}

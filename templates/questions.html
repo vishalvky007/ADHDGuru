@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADHD Questionnaire</title>
+    <link href="../styles/output.css" rel="stylesheet" />
+    <style>
+      /* Custom radio button styling */
+      .radio-container {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        margin: 0 auto;
+      }
+
+      .custom-radio {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #f3f4f6;
+        border: 2px solid #d1d5db;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+      }
+
+      .radio-container input:checked ~ .custom-radio {
+        background-color: white;
+        border-color: #4338ca;
+        box-shadow: 0 0 0 2px rgba(67, 56, 202, 0.2);
+      }
+
+      .custom-radio:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #4338ca;
+        transform: translate(-50%, -50%);
+      }
+
+      .radio-container input:checked ~ .custom-radio:after {
+        display: block;
+      }
+
+      .radio-container:hover .custom-radio {
+        background-color: #e5e7eb;
+        transform: scale(1.05);
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9fafb;
+      }
+
+      tr:hover {
+        background-color: #f3f4f6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="bg-primary fixed top-0 left-0 right-0 w-full z-50 px-4 py-2 shadow-md"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center h-16">
+        <span class="text-secondary font-bold text-2xl transition-colors duration-300">ADHDGuru</span>
+        <a
+          id="login-btn"
+          class="auth-toggle-btn px-6 py-2 rounded-md font-semibold text-md border-2 border-secondary text-primary bg-secondary hover:bg-secondary hover:text-primary transition"
+          href="./features.html"
+        >
+          Back to Home
+        </a>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="max-w-7xl mx-auto px-4 mt-20 mb-20">
+      <div class="bg-white shadow-sm rounded-lg p-6 md:p-8 overflow-x-auto">
+        <!-- Sticky Header Section -->
+        <div class="sticky top-20 bg-white z-10 pb-4 mb-4 border-b border-gray-200">
+          <h1 class="text-2xl font-bold text-center text-gray-700">
+            Adult ADHD Self-Report
+          </h1>
+        </div>
+        <form id="adhd-form" action="#" method="post">
+          <table class="min-w-full text-sm text-left border-collapse">
+            <thead class="sticky top-32 bg-gray-100 z-10">
+              <tr>
+                <th class="p-3 text-lg text-center">S.No.</th>
+                <!-- New Column -->
+                <th class="p-3 text-lg text-center">Question</th>
+                <th class="p-3 text-lg text-center">Never</th>
+                <th class="p-3 text-lg text-center">Rarely</th>
+                <th class="p-3 text-lg text-center">Sometimes</th>
+                <th class="p-3 text-lg text-center">Often</th>
+                <th class="p-3 text-lg text-center whitespace-nowrap">
+                  Very Often
+                </th>
+                <th class="p-3 text-lg text-center">Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Template Row -->
+              <tr id="question-row-template" class="hidden">
+                <td class="p-3 text-lg font-medium text-center" id="sno"></td>
+                <!-- S.No. -->
+                <td class="p-3 text-lg font-medium" id="question-text"></td>
+                <!-- Question Text -->
+                <td class="text-center">
+                  <label class="radio-container">
+                    <input
+                      type="radio"
+                      name="question1"
+                      value="Never"
+                      class="hidden"
+                      required
+                    />
+                    <span class="custom-radio"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                  <label class="radio-container">
+                    <input
+                      type="radio"
+                      name="question1"
+                      value="Rarely"
+                      class="hidden"
+                    />
+                    <span class="custom-radio"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                  <label class="radio-container">
+                    <input
+                      type="radio"
+                      name="question1"
+                      value="Sometimes"
+                      class="hidden"
+                    />
+                    <span class="custom-radio"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                  <label class="radio-container">
+                    <input
+                      type="radio"
+                      name="question1"
+                      value="Often"
+                      class="hidden"
+                    />
+                    <span class="custom-radio"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                  <label class="radio-container">
+                    <input
+                      type="radio"
+                      name="question1"
+                      value="Very Often"
+                      class="hidden"
+                    />
+                    <span class="custom-radio"></span>
+                  </label>
+                </td>
+                <td class="text-center">
+                  <button
+                    type="button"
+                    class="text-lg font-medium bg-primary text-secondary rounded-md px-4 py-1 question-btn hover:bg-secondary hover:text-primary transition"
+                    data-question-id="1"
+                  >
+                    Click
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- SUBMIT BUTTON -->
+          <div class="flex flex-col items-center mt-8">
+            <div id="validation-message" class="hidden text-red-600 font-medium mb-4">
+              Please answer all questions before submitting.
+            </div>
+            <button
+              type="submit"
+              class="px-6 py-2 bg-primary text-xl text-white font-medium rounded-md hover:bg-secondary hover:text-black hover:outline-black transition"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Modal for question responses -->
+    <div
+      id="responseModal"
+      class="fixed inset-0 flex items-center justify-center z-50"
+      style="display: none; background-color: rgba(0, 0, 0, 0.5);"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-4 pb-2">
+          <h3 class="text-xl font-bold text-gray-800">Question Information</h3>
+          <button
+            id="closeModal"
+            class="text-gray-500 hover:text-gray-800 transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-lg font-semibold text-primary">Meaning:</h4>
+            <p id="modalMeaning" class="text-gray-700 mt-1 text-base"></p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary">Example:</h4>
+            <p id="modalExample" class="text-gray-700 mt-1 text-base italic"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADHD Report Modal -->
+    <div
+      id="reportModal"
+      class="fixed inset-0 flex items-center justify-center z-50"
+      style="display: none; background-color: rgba(0, 0, 0, 0.5);"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
+          <h3 class="text-xl font-bold text-gray-800">Your ADHD Assessment Report</h3>
+          <button
+            id="closeReportModal"
+            class="text-gray-500 hover:text-gray-800 transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="space-y-6">
+          <div class="flex justify-center">
+            <div id="resultBadge" class="px-4 py-2 rounded-full text-white font-bold text-lg"></div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold text-primary">Score Summary:</h4>
+            <div class="mt-3 bg-gray-50 p-4 rounded-lg">
+              <div class="grid grid-cols-2 gap-2">
+                <div class="text-gray-600">Total Score:</div>
+                <div id="totalScore" class="font-semibold text-right"></div>
+                
+                <div class="text-gray-600">"Often/Very Often" Count:</div>
+                <div id="oftenCount" class="font-semibold text-right"></div>
+                
+                <div class="text-gray-600">Max Possible Score:</div>
+                <div id="maxScore" class="font-semibold text-right"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold text-primary">What This Means:</h4>
+            <p id="resultExplanation" class="text-gray-700 mt-1 leading-relaxed"></p>
+          </div>
+          
+          <div class="mt-2 pt-2 border-t border-gray-200">
+            <p class="text-sm text-gray-500 italic">Note: This is a screening tool and not a diagnostic test. Please consult with a healthcare professional for a proper diagnosis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Store all questions data globally
+        let questionsData = [];
+
+        // Option to Score Mapping
+        const optionScoreMap = {
+          "Never": 0,
+          "Rarely": 1,
+          "Sometimes": 2,
+          "Often": 3,
+          "Very Often": 4,
+        };
+
+        // Function to calculate ADHD score
+        function calculateADHDScore(answers) {
+          let totalScore = 0;
+          let oftenOrVeryOftenCount = 0;
+
+          answers.forEach(answer => {
+            const score = optionScoreMap[answer] ?? 0; // Default to 0 if invalid answer
+            totalScore += score;
+            if (answer === "Often" || answer === "Very Often") {
+              oftenOrVeryOftenCount++;
+            }
+          });
+
+          // Threshold logic
+          const hasADHDSymptoms = oftenOrVeryOftenCount >= 6;
+
+          return {
+            totalScore,
+            oftenOrVeryOftenCount,
+            result: hasADHDSymptoms ? "Possible ADHD" : "Unlikely ADHD",
+          };
+        }
+
+        // Function to check if all questions are answered
+        function areAllQuestionsAnswered(numberOfQuestions) {
+          for (let i = 1; i <= numberOfQuestions; i++) {
+            const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+            if (!selectedOption) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+        // Fetch the JSON file
+        fetch("../static/questions.json")
+          .then((response) => response.json())
+          .then((data) => {
+            questionsData = data.questions; // Store questions for later use
+            const questionContainer = document.querySelector("tbody");
+            const templateRow = document.getElementById(
+              "question-row-template"
+            );
+
+            // Iterate through each question in the JSON
+            data.questions.forEach((question) => {
+              // Clone the template row
+              const newRow = templateRow.cloneNode(true);
+              newRow.removeAttribute("id"); // Remove the ID since it's a template
+              newRow.classList.remove("hidden"); // Make the row visible
+
+              // Populate the S.No.
+              const snoElement = newRow.querySelector("#sno");
+              snoElement.textContent = question.id;
+
+              // Populate the question text
+              const questionTextElement =
+                newRow.querySelector("#question-text");
+              questionTextElement.textContent = question.text;
+
+              // Populate the radio buttons with options
+              const radioButtons = newRow.querySelectorAll(
+                'input[type="radio"]'
+              );
+              radioButtons.forEach((radio, index) => {
+                radio.value = question.options[index];
+                radio.name = `question${question.id}`;
+                
+                // Add required attribute to the first radio button of each group
+                if (index === 0) {
+                  radio.required = true;
+                }
+              });
+
+              // Update the button's data-question-id attribute
+              const button = newRow.querySelector(".question-btn");
+              button.setAttribute("data-question-id", question.id);
+
+              // Append the new row to the container
+              questionContainer.appendChild(newRow);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching questions:", error);
+            alert("Failed to load questions. Please try again.");
+          });
+
+        // Modal elements
+        const modal = document.getElementById("responseModal");
+        const modalMeaning = document.getElementById("modalMeaning");
+        const modalExample = document.getElementById("modalExample");
+        const closeModal = document.getElementById("closeModal");
+        
+        // Report modal elements
+        const reportModal = document.getElementById("reportModal");
+        const closeReportModal = document.getElementById("closeReportModal");
+        const resultBadge = document.getElementById("resultBadge");
+        const totalScore = document.getElementById("totalScore");
+        const oftenCount = document.getElementById("oftenCount");
+        const maxScore = document.getElementById("maxScore");
+        const resultExplanation = document.getElementById("resultExplanation");
+        
+        // Validation message
+        const validationMessage = document.getElementById("validation-message");
+        
+        // Close modal when close button is clicked
+        if (closeModal) {
+          closeModal.addEventListener("click", function () {
+            modal.style.display = "none";
+          });
+        }
+        
+        // Close report modal when close button is clicked
+        if (closeReportModal) {
+          closeReportModal.addEventListener("click", function () {
+            reportModal.style.display = "none";
+          });
+        }
+        
+        // Handle click on question buttons
+        document.addEventListener('click', function(event) {
+          if (event.target.matches('.question-btn')) {
+            const questionId = parseInt(event.target.getAttribute("data-question-id"));
+            
+            // Find the question data based on ID
+            const questionData = questionsData.find(q => q.id === questionId);
+            
+            if (questionData && modal && modalMeaning && modalExample) {
+              // Display meaning and example in modal
+              modalMeaning.textContent = questionData.meaning;
+              modalExample.textContent = questionData.example;
+              
+              // Show modal
+              modal.style.display = "flex";
+            }
+          }
+        });
+
+        // Close modal when clicking outside
+        if (modal) {
+          window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+              modal.style.display = "none";
+            }
+          });
+        }
+        
+        // Close report modal when clicking outside
+        if (reportModal) {
+          window.addEventListener("click", function (event) {
+            if (event.target === reportModal) {
+              reportModal.style.display = "none";
+            }
+          });
+        }
+        
+        // Add event listeners to radio buttons to hide validation message when an option is selected
+        document.addEventListener('change', function(event) {
+          if (event.target.matches('input[type="radio"]')) {
+            if (validationMessage) {
+              validationMessage.classList.add('hidden');
+            }
+          }
+        });
+        
+        // Form submission
+        const form = document.getElementById("adhd-form");
+        if (form) {
+          form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Count how many questions we have
+            let numberOfQuestions = 0;
+            questionsData.forEach(question => {
+              numberOfQuestions = Math.max(numberOfQuestions, question.id);
+            });
+            
+            // Check if all questions are answered
+            if (!areAllQuestionsAnswered(numberOfQuestions)) {
+              // Show validation message
+              if (validationMessage) {
+                validationMessage.classList.remove('hidden');
+              }
+              
+              // Scroll to the first unanswered question
+              for (let i = 1; i <= numberOfQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+                if (!selectedOption) {
+                  const questionRow = document.querySelector(`input[name="question${i}"]`).closest('tr');
+                  if (questionRow) {
+                    questionRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Highlight the unanswered row
+                    questionRow.classList.add('bg-red-50');
+                    setTimeout(() => {
+                      questionRow.classList.remove('bg-red-50');
+                    }, 2000);
+                    
+                    break;
+                  }
+                }
+              }
+              
+              return false;
+            }
+            
+            // Collect all answers
+            const answers = [];
+            
+            // Get selected values for each question
+            for (let i = 1; i <= numberOfQuestions; i++) {
+              const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+              if (selectedOption) {
+                answers.push(selectedOption.value);
+              }
+            }
+            
+            // Calculate ADHD score
+            const result = calculateADHDScore(answers);
+            
+            // Update report modal with results
+            if (resultBadge) {
+              resultBadge.textContent = result.result;
+              resultBadge.className = "px-4 py-2 rounded-full text-white font-bold text-lg";
+              
+              if (result.result === "Possible ADHD") {
+                resultBadge.classList.add("bg-yellow-500");
+                resultExplanation.textContent = 
+                  "Your responses indicate that you may have symptoms consistent with ADHD. " +
+                  "This screening suggests you answered 'Often' or 'Very Often' to 6 or more questions, " +
+                  "which is a threshold often used to identify potential ADHD symptoms. " +
+                  "We recommend discussing these results with a healthcare professional for a proper evaluation.";
+              } else {
+                resultBadge.classList.add("bg-green-500");
+                resultExplanation.textContent = 
+                  "Your responses indicate that you are less likely to have ADHD based on this screening. " +
+                  "You answered 'Often' or 'Very Often' to fewer than 6 questions. " +
+                  "However, if you're experiencing difficulties with attention, focus, or other concerns, " +
+                  "it's still valid to discuss them with a healthcare professional.";
+              }
+            }
+            
+            if (totalScore) totalScore.textContent = result.totalScore;
+            if (oftenCount) oftenCount.textContent = result.oftenOrVeryOftenCount;
+            if (maxScore) maxScore.textContent = numberOfQuestions * 4; // 4 is max score per question
+            
+            // Show report modal
+            if (reportModal) {
+              reportModal.style.display = "flex";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

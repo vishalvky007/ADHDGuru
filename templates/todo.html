@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADHD - Todo</title>
+    <link rel="stylesheet" href="../styles/output.css" />
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav
+      class="bg-primary fixed top-0 left-0 right-0 w-full z-50 px-4 py-2 shadow-md"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center h-16">
+        <span class="text-secondary font-bold text-2xl transition-colors duration-300">ADHDGuru</span>
+        <a
+          id="login-btn"
+          class="auth-toggle-btn px-6 py-2 rounded-md font-semibold text-md border-2 border-secondary text-primary bg-secondary hover:bg-secondary hover:text-primary transition"
+          href="./index.html"
+        >
+          Back to Home
+        </a>
+      </div>
+	</nav>
+
+	<!-- Main Content with Animated Button -->
+	<div class="fixed inset-0 flex items-center justify-center z-40">
+	  <button
+		id="open-chatbot-btn"
+		class="flex flex-col items-center justify-center px-10 py-6 bg-primary hover:bg-purple-700 text-white text-2xl font-bold rounded-xl w-[20%] h-[20%] shadow-2xl transform transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-purple-300 animate-pulse"
+		onclick="toggleModal('chatbot-modal')"
+	  >
+		<svg
+		  class="w-28 h-28 mb-4"
+		  fill="none"
+		  stroke="currentColor"
+		  viewBox="0 0 24 24"
+		  xmlns="http://www.w3.org/2000/svg"
+		>
+		  <path
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			stroke-width="2"
+			d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+		  ></path>
+		</svg>
+		<span>Open Chat</span>
+		<span class="text-lg mt-3">Get assistance now</span>
+	  </button>
+	</div>
+      </button>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div
+      id="chatbot-modal"
+      class="modal fixed inset-0 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity duration-300 ease-out opacity-0 p-6"
+    >
+      <div
+        class="bg-secondary text-primary rounded-xl shadow-2xl transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col w-4/5 max-w-4xl h-3/4 max-h-[700px]"
+      >
+        <!-- Modal Header -->
+        <div
+          class="flex justify-between items-center px-6 py-4 border-b border-gray-200"
+        >
+          <h3 class="text-2xl font-bold">Ask your Query!</h3>
+          <button
+            class="modal-close text-gray-600 hover:text-black focus:outline-none transition-colors duration-200"
+            onclick="toggleModal('chatbot-modal')"
+          >
+            <svg
+              class="h-8 w-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="flex-grow overflow-hidden p-6">
+          <!-- Main Chat Area -->
+          <div
+            id="chat-container"
+            class="h-full w-full overflow-y-auto p-6 bg-gray-50 rounded-lg shadow-inner"
+          >
+            <!-- Welcome message -->
+            <div class="flex justify-start mb-6">
+              <div
+                class="bg-gray-200 text-black rounded-lg py-3 px-4 max-w-[80%] shadow-sm"
+              >
+                <p class="font-medium">
+                  Welcome to the ADHD Self-Report assistant! How can I help you
+                  today?
+                </p>
+                <p class="text-xs text-gray-500 mt-1">Just now</p>
+              </div>
+            </div>
+
+            <!-- Sample conversation -->
+            <div class="flex justify-end mb-6">
+              <div
+                class="bg-primary text-white rounded-lg py-3 px-4 max-w-[80%] shadow-sm"
+              >
+                <p>
+                  I'm having trouble focusing on my homework assignments. Any
+                  tips?
+                </p>
+                <p class="text-xs text-gray-300 mt-1 text-right">
+                  2 minutes ago
+                </p>
+              </div>
+            </div>
+
+            <div class="flex justify-start mb-6">
+              <div
+                class="bg-gray-200 text-black rounded-lg py-3 px-4 max-w-[80%] shadow-sm"
+              >
+                <p>Here are some strategies that might help:</p>
+                <ul class="list-disc ml-5 mt-2 space-y-1">
+                  <li>Break tasks into smaller, manageable chunks</li>
+                  <li>
+                    Use a timer for focused work sessions (try the Pomodoro
+                    technique)
+                  </li>
+                  <li>Remove distractions from your workspace</li>
+                  <li>Consider background music without lyrics</li>
+                  <li>Take regular short breaks to reset your focus</li>
+                </ul>
+                <p class="text-xs text-gray-500 mt-2">1 minute ago</p>
+              </div>
+            </div>
+
+            <!-- More messages can be added dynamically -->
+          </div>
+        </div>
+
+        <!-- Input Section -->
+        <div
+          class="flex-shrink-0 gap-3 items-center p-6 border-t border-gray-200 bg-gray-50"
+        >
+          <div class="flex w-full gap-3">
+            <input
+              type="text"
+              id="chat-input"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow duration-200"
+              placeholder="Type your query..."
+              onkeydown="if(event.key === 'Enter') sendMessage()"
+            />
+            <button
+              id="send-btn"
+              class="px-6 py-3 bg-primary text-white rounded-lg font-semibold border border-primary hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all duration-200 transform hover:scale-105 active:scale-95"
+              onclick="sendMessage()"
+            >
+              Send
+            </button>
+            <button
+              id="mic-btn"
+              class="px-4 py-3 bg-primary text-white rounded-lg font-semibold border border-primary hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all duration-200 transform hover:scale-105 active:scale-95"
+              aria-label="Use Microphone"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const modalContent = modal.querySelector("div");
+
+        if (modal.classList.contains("hidden")) {
+          // Show the modal
+          modal.classList.remove("hidden");
+          // Use setTimeout to ensure the display change has taken effect
+          setTimeout(() => {
+            modal.classList.remove("opacity-0");
+            modalContent.classList.remove("scale-95", "opacity-0");
+          }, 10);
+        } else {
+          // Hide the modal
+          modal.classList.add("opacity-0");
+          modalContent.classList.add("scale-95", "opacity-0");
+          // Use setTimeout to match the transition duration
+          setTimeout(() => {
+            modal.classList.add("hidden");
+          }, 300);
+        }
+      }
+
+      function sendMessage() {
+        const chatInput = document.getElementById("chat-input");
+        const chatContainer = document.getElementById("chat-container");
+        const message = chatInput.value.trim();
+
+        if (message) {
+          // Add user message
+          const userMessageEl = document.createElement("div");
+          userMessageEl.className = "flex justify-end mb-6";
+          userMessageEl.innerHTML = `
+		  <div class="bg-primary text-white rounded-lg py-3 px-4 max-w-[80%] shadow-sm">
+			<p>${message}</p>
+			<p class="text-xs text-gray-300 mt-1 text-right">Just now</p>
+		  </div>
+		`;
+          chatContainer.appendChild(userMessageEl);
+
+          // Simulate response (in a real app, this would come from your API)
+          setTimeout(() => {
+            const botMessageEl = document.createElement("div");
+            botMessageEl.className = "flex justify-start mb-6";
+            botMessageEl.innerHTML = `
+			<div class="bg-gray-200 text-black rounded-lg py-3 px-4 max-w-[80%] shadow-sm">
+			  <p>Thanks for your message! This is a simulated response to: "${message}"</p>
+			  <p class="text-xs text-gray-500 mt-1">Just now</p>
+			</div>
+		  `;
+            chatContainer.appendChild(botMessageEl);
+
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }, 1000);
+
+          // Clear input
+          chatInput.value = "";
+
+          // Scroll to bottom
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+      }
+
+      // Add button animation on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const button = document.getElementById("open-chatbot-btn");
+
+        // Add additional entrance animation
+        button.classList.add("opacity-0");
+        setTimeout(() => {
+          button.classList.remove("opacity-0");
+          button.classList.add("animate-bounce");
+
+          // Remove bounce after a few iterations
+          setTimeout(() => {
+            button.classList.remove("animate-bounce");
+            button.classList.add("animate-pulse");
+          }, 2000);
+        }, 300);
+      });
+    </script>
+
+    <!-- Speech Recognition Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const micBtn = document.getElementById("mic-btn");
+        const chatInput = document.getElementById("chat-input");
+
+        // Check if browser supports speech recognition
+        if (
+          "webkitSpeechRecognition" in window ||
+          "SpeechRecognition" in window
+        ) {
+          const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+          const recognition = new SpeechRecognition();
+
+          recognition.continuous = false;
+          recognition.interimResults = true;
+          recognition.lang = "en-US";
+
+          let isListening = false;
+
+          micBtn.addEventListener("click", () => {
+            if (!isListening) {
+              // Start listening
+              recognition.start();
+              isListening = true;
+              micBtn.classList.add("bg-secondary");
+              chatInput.placeholder = "Listening...";
+            } else {
+              // Stop listening
+              recognition.stop();
+              isListening = false;
+              micBtn.classList.remove("bg-secondary");
+              chatInput.placeholder = "Type your query...";
+            }
+          });
+
+          // Process speech results
+          recognition.onresult = (event) => {
+            const transcript = Array.from(event.results)
+              .map((result) => result[0])
+              .map((result) => result.transcript)
+              .join("");
+
+            chatInput.value = transcript;
+
+            // If final result
+            if (event.results[0].isFinal) {
+              // Delay sending to allow user to see what was transcribed
+              setTimeout(() => {
+                sendMessage();
+                recognition.stop();
+                isListening = false;
+                micBtn.classList.remove("bg-secondary");
+                chatInput.placeholder = "Type your query...";
+              }, 1000);
+            }
+          };
+
+          // Handle errors
+          recognition.onerror = (event) => {
+            console.error("Speech recognition error", event.error);
+            isListening = false;
+            micBtn.classList.remove("bg-secondary");
+            chatInput.placeholder = "Type your query...";
+          };
+
+          recognition.onend = () => {
+            isListening = false;
+            micBtn.classList.remove("bg-secondary");
+            chatInput.placeholder = "Type your query...";
+          };
+        } else {
+          // Browser doesn't support speech recognition
+          micBtn.addEventListener("click", () => {
+            alert(
+              "Speech recognition is not supported in your browser. Please try Chrome, Edge, or Safari."
+            );
+          });
+          micBtn.classList.add("opacity-50");
+        }
+      });
+
+      // Add button animation on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const button = document.getElementById("open-chatbot-btn");
+
+        // Add additional entrance animation
+        button.classList.add("opacity-0");
+        setTimeout(() => {
+          button.classList.remove("opacity-0");
+          button.classList.add("animate-bounce");
+
+          // Remove bounce after a few iterations
+          setTimeout(() => {
+            button.classList.remove("animate-bounce");
+            button.classList.add("animate-pulse");
+          }, 2000);
+        }, 300);
+      });
+    </script>
+  </body>
+</html>

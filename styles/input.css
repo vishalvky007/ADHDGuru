@@ -1,0 +1,14 @@
+@import "tailwindcss" source("../templates/");
+
+@theme {
+  --color-primary: #312C85;
+  --color-secondary: #ffffff;
+  --color-input: #0d1117;
+  --color-myyellow: #f0cf2b;
+}
+
+/* @layer base {
+  button {
+    @apply transition-colors duration-300 px-6 py-2 rounded-md font-semibold bg-secondary text-black hover:bg-myyellow hover:text-black cursor-pointer;
+  }
+} */
