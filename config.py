@@ -19,4 +19,4 @@ MODEL_NAME = 'gemini-1.5-flash-latest'
 
 # Flask Configuration
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
-PORT = int(os.getenv('PORT', 5000)) 
+PORT = int(os.getenv('PORT', 8000)) 
