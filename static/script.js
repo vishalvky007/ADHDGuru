@@ -127,34 +127,47 @@ function scrollToWithOffset(id, offset = 100) {
 // }
 
 // Chat functionality
+
 let currentChatId = null;
 let chatInitialized = false;
 
 // Function to start a new chat session
+/**
+ * Starts a new chat session by making a POST request to the server.
+ * 
+ * @returns {Promise<boolean>} - Resolves to true if the chat session starts successfully, otherwise false.
+ * @throws {Error} - Throws an error if the request fails or the server returns an unexpected response.
+ */
 async function startChatSession() {
     try {
         console.log("Starting new chat session...");
         
-        const response = await fetch('/api/chat/start', {
+        const response = await fetch('http://localhost:8000/api/chat/start', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user_id: 'user_' + Date.now() })
+            body: JSON.stringify({ user_id: 'user_' + crypto.randomUUID() })
         });
-        
+
+        if (!response.ok) {
+            throw new Error(`Failed to start chat session: ${response.status} ${response.statusText}`);
+        }
+
         const data = await response.json();
-        if (data.status === 'success') {
+        if (data && data.status === 'success') {
             console.log("Chat session started successfully, chat ID:", data.chat_id);
             currentChatId = data.chat_id;
-            chatInitialized = true;
             return true;
+            chatInitialized = true;
         } else {
-            console.error("Failed to start chat session:", data.message);
+            console.log("Failed to start chat session:", data.message);
+            // Suggest checking the server logs or API endpoint for more details
+            console.info("Please check the server logs or ensure the API endpoint '/api/chat/start' is accessible.");
             return false;
         }
     } catch (error) {
-        console.error('Error starting chat session:', error);
+        console.log('Error starting chat session:', error);
         return false;
     }
 }
@@ -232,7 +245,7 @@ async function sendMessage() {
         
         console.log("Sending message to chat API...");
         // Make the API call with retry
-        const response = await retryFetch('/api/chat/message', {
+        const response = await retryFetch('http://localhost:8000/api/chat/message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
